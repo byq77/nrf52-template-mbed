@@ -1,0 +1,99 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "BUILD (RELEASE)",
+            "type": "shell",
+            "command": "mbed",
+            "args": [
+                "compile",
+                "-m",
+                "NRF52_DK",
+                "-t",
+                "GCC_ARM",
+                "--profile",
+                "release",
+                "-N",
+                "firmware",
+                "--source",
+                "${workspaceFolder}/../mbed-os",
+                "--source",
+                "${workspaceFolder}",
+                "--build",
+                "${workspaceFolder}/BUILD/RELEASE"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(\\[ERROR\\])*\\s*(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 2,
+                    "line": 3,
+                    "column": 4,
+                    "severity": 5,
+                    "message": 6
+                }
+            }
+        },
+        {
+            "label": "BUILD (DEBUG)",
+            "type": "shell",
+            "command": "mbed",
+            "args": [
+                "compile",
+                "-m",
+                "NRF52_DK",
+                "-t",
+                "GCC_ARM",
+                "--profile",
+                "debug",
+                "-N",
+                "firmware",
+                "--source",
+                "${workspaceFolder}/../mbed-os",
+                "--source",
+                "${workspaceFolder}",
+                "--build",
+                "${workspaceFolder}/BUILD/DEBUG"
+            ],
+            "group": "build",
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": "absolute",
+                "pattern": {
+                    "regexp": "^(\\[ERROR\\])*\\s*(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 2,
+                    "line": 3,
+                    "column": 4,
+                    "severity": 5,
+                    "message": 6
+                }
+            }
+        },
+        {
+            "label": "FLASH FIRMWARE (RELEASE)",
+            "type": "shell",
+            "command": "nrfjprog -f NRF52 --program ./BUILD/RELEASE/firmware.hex --sectorerase --reset"
+        },
+        {
+            "label": "FLASH FIRMWARE (DEBUG)",
+            "type": "shell",
+            "command": "nrfjprog -f NRF52 --program ./BUILD/DEBUG/firmware.hex --sectorerase --reset"
+        },
+        {
+            "label": "CLEAN RELEASE",
+            "type": "shell",
+            "command": "rm -rf ${workspaceFolder}/BUILD/RELEASE"
+        },
+        {
+            "label": "CLEAN DEBUG",
+            "type": "shell",
+            "command": "rm -rf ${workspaceFolder}/BUILD/DEBUG"
+        }
+
+    ]
+}

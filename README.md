@@ -52,6 +52,7 @@ components/wifi/*
 components/802.15.4_RF/*
 components/storage/*
 components/TARGET_PSA/*
+usb/*
 ```
 
 4. Set path to mbed-os in Mbed CLI
